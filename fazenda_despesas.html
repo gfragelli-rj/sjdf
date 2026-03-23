@@ -1,3 +1,22 @@
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const SUPABASE_URL = 'https://SEU-PROJETO.supabase.co';  // ← cole aqui
+  const SUPABASE_KEY = 'eyJ...SUA-CHAVE-ANON...';          // ← cole aqui
+  const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+  // Exemplo: salvar novo lançamento no banco
+  async function salvarNoBanco(lancamento) {
+    const { error } = await db.from('despesas').insert({
+      ano: parseInt(lancamento.ano),
+      mes: lancamento.mes,
+      categoria: lancamento.cat,
+      valor_operacional: lancamento.oper,
+      valor_investimento: lancamento.inv,
+      observacao: lancamento.obs
+    });
+    if (error) console.error('Erro ao salvar:', error);
+  }
+</script>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
